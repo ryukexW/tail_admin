@@ -3,23 +3,15 @@ version: "3.9"
 services:
 
   app:
-    image: yourdockerhub/laravel-app:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: laravel_app
     restart: unless-stopped
-    working_dir: /var/www
-
-    environment:
-      APP_ENV: production
-      APP_DEBUG: "false"
-      APP_KEY: ${APP_KEY}
-      APP_URL: ${APP_URL}
-
-      DB_CONNECTION: mysql
-      DB_HOST: ${DB_HOST}
-      DB_PORT: 3306
-      DB_DATABASE: ${DB_DATABASE}
-      DB_USERNAME: ${DB_USERNAME}
-      DB_PASSWORD: ${DB_PASSWORD}
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
 
     networks:
       - laravel
