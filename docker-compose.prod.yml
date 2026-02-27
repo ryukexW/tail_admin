@@ -5,14 +5,11 @@ services:
   app:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: docker/php/Dockerfile
     container_name: laravel_app
     restart: unless-stopped
     env_file:
       - .env
-    ports:
-      - "8000:8000"
-
     networks:
       - laravel
 
